@@ -7,7 +7,7 @@ export default function Appbar(): ReactElement {
       <Col>
         <Navbar bg="primary" variant="dark">
           <Container>
-            <Navbar.Brand href="/">Vulder - Admin Panel</Navbar.Brand>
+            <Navbar.Brand href="#">Vulder - Admin Panel</Navbar.Brand>
             <Nav className="me-auto">
               <Nav.Link href="#home">Back to vulder.xyz</Nav.Link>
             </Nav>
