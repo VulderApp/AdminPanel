@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# AdminPanel
+
+Admin panel for privileged users to manage schools
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
