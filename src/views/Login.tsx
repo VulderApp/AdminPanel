@@ -5,7 +5,7 @@ import LoginForm from "../components/login/LoginForm";
 export default function Login(): ReactElement {
   return (
     <Row>
-      <Col md={{ span: 6, offset: 3 }}>
+      <Col>
         <div className="d-flex justify-content-center">
           <LoginForm/>
         </div>
