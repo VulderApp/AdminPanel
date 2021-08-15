@@ -1,14 +1,40 @@
 import React, {ReactElement, useState} from 'react';
+import { store } from 'react-notifications-component';
 import {Button, Card, FloatingLabel, Form, FormGroup} from "react-bootstrap";
 import api from "../../api/api";
+import tokenStorage from "../../utils/tokenStorageUtil";
+
+const showErrorAlert = (message: string) => {
+  store.addNotification({
+    title: "Error",
+    message: message,
+    type: "danger",
+    insert: "bottom",
+    container: "bottom-right",
+    animationIn: ["animate__animated", "animate__fadeIn"],
+    animationOut: ["animate__animated", "animate__fadeOut"],
+    dismiss: {
+      duration: 5000,
+      onScreen: true
+    }
+  });
+}
 
 const login = async (email: string, password: string): Promise<void> => {
-  await api.login(email, password)
+  const token = await api.login(email, password)
+  switch (token.status) {
+    case 200:
+      tokenStorage.setToken(token.data)
+      break;
+    case 500:
+      showErrorAlert("Internal server error")
+      break;
+  }
 }
 
 export default function LoginForm(): ReactElement {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
 
   return (
         <Card className="text-center">
