@@ -4,8 +4,8 @@ export default {
   setToken(token: string): void {
     localStorage.setItem(tokenKeyName, token);
   },
-  isExists(): boolean {
-    return !localStorage.getItem(tokenKeyName);
+  isNotExists(): boolean {
+    return localStorage.getItem(tokenKeyName) == null;
   },
   removeToken(): void {
     localStorage.removeItem(tokenKeyName);

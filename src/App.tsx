@@ -8,9 +8,19 @@ import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { useRecoilState } from "recoil";
 import { routeHistory } from "./states";
+import tokenStorageUtil from "./utils/tokenStorageUtil";
 
 export default function App(): ReactElement {
   const [history] = useRecoilState(routeHistory);
+
+  const handleTokenExisting = () => {
+    if (tokenStorageUtil.isNotExists()) {
+      history.push("/login")
+    }
+    history.push("/")
+  }
+
+  handleTokenExisting()
 
   return (
     <Router history={history}>
