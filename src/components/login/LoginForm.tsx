@@ -30,15 +30,12 @@ export default function LoginForm(): ReactElement {
   const [password, setPassword] = useState<string>("");
 
   const validateBeforeLogin = () => {
-    if (validationUtil.isEmpty(email) || validationUtil.isEmpty(password))
-    {
-      showErrorAlert("Please fill all fields")
-      return false
+    if (validationUtil.isEmpty(email) || validationUtil.isEmpty(password)) {
+      showErrorAlert("Please fill all fields");
+      return false;
     }
-
-
-    return true
-  }
+    return true;
+  };
 
   const login = async (): Promise<void> => {
     const token = await api.login(email, password);
@@ -87,8 +84,8 @@ export default function LoginForm(): ReactElement {
             </FloatingLabel>
             <Button
               onClick={async () => {
-                validateBeforeLogin()
-                await login()
+                validateBeforeLogin();
+                await login();
               }}
             >
               Login
