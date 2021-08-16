@@ -7,17 +7,20 @@ import Appbar from "./components/app/Appbar";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 import { useRecoilState } from "recoil";
-import { routeHistory } from "./states";
+import {isLoggedIn, routeHistory} from "./states";
 import tokenStorageUtil from "./utils/tokenStorageUtil";
 
 export default function App(): ReactElement {
+  const [,setLoggedIn] = useRecoilState(isLoggedIn)
   const [history] = useRecoilState(routeHistory);
 
   const handleTokenExisting = () => {
     if (tokenStorageUtil.isNotExists()) {
       history.push("/login")
+      return;
     }
     history.push("/")
+    setLoggedIn(true)
   }
 
   handleTokenExisting()
