@@ -5,6 +5,7 @@ import api from "../../api/api";
 import tokenStorage from "../../utils/tokenStorageUtil";
 import { useRecoilState } from "recoil";
 import { isLoggedIn, routeHistory } from "../../states";
+import validationUtil from "../../utils/validationUtil";
 
 const showErrorAlert = (message: string) => {
   store.addNotification({
@@ -28,6 +29,17 @@ export default function LoginForm(): ReactElement {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const validateBeforeLogin = () => {
+    if (validationUtil.isEmpty(email) || validationUtil.isEmpty(password))
+    {
+      showErrorAlert("Please fill all fields")
+      return false
+    }
+
+
+    return true
+  }
+
   const login = async (): Promise<void> => {
     const token = await api.login(email, password);
     switch (token.status) {
@@ -35,6 +47,9 @@ export default function LoginForm(): ReactElement {
         tokenStorage.setToken(token.data);
         setLoggedIn(true);
         history.push("/");
+        break;
+      case 400:
+        showErrorAlert("Email or password are invalid");
         break;
       case 500:
         showErrorAlert("Internal server error");
@@ -72,7 +87,8 @@ export default function LoginForm(): ReactElement {
             </FloatingLabel>
             <Button
               onClick={async () => {
-                await login();
+                validateBeforeLogin()
+                await login()
               }}
             >
               Login
