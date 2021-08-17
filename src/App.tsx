@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { ReactElement } from "react";
+import { Router, Switch, Route } from "react-router-dom";
+import Login from "./views/Login";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Container } from "react-bootstrap";
+import Appbar from "./components/app/Appbar";
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { useRecoilState } from "recoil";
+import {isLoggedIn, routeHistory} from "./states";
+import tokenStorageUtil from "./utils/tokenStorageUtil";
 
-function App() {
+export default function App(): ReactElement {
+  const [,setLoggedIn] = useRecoilState(isLoggedIn)
+  const [history] = useRecoilState(routeHistory);
+
+  const handleTokenExisting = () => {
+    if (tokenStorageUtil.isNotExists()) {
+      history.push("/login")
+      return;
+    }
+    history.push("/")
+    setLoggedIn(true)
+  }
+
+  handleTokenExisting()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <div className="App">
+        <ReactNotification />
+        <Appbar />
+        <Container>
+          <div className="content">
+            <Switch>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </Switch>
+          </div>
+        </Container>
+      </div>
+    </Router>
   );
 }
-
-export default App;
