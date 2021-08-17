@@ -1,27 +1,11 @@
 import React, { ReactElement, useState } from "react";
-import { store } from "react-notifications-component";
 import { Button, Card, FloatingLabel, Form, FormGroup } from "react-bootstrap";
 import api from "../../api/api";
 import tokenStorage from "../../utils/tokenStorageUtil";
 import { useRecoilState } from "recoil";
 import { isLoggedIn, routeHistory } from "../../states";
 import validationUtil from "../../utils/validationUtil";
-
-const showErrorAlert = (message: string) => {
-  store.addNotification({
-    title: "Error",
-    message: message,
-    type: "danger",
-    insert: "bottom",
-    container: "bottom-right",
-    animationIn: ["animate__animated", "animate__fadeIn"],
-    animationOut: ["animate__animated", "animate__fadeOut"],
-    dismiss: {
-      duration: 5000,
-      onScreen: true,
-    },
-  });
-};
+import notificationUtil from "../../utils/notificationUtil";
 
 export default function LoginForm(): ReactElement {
   const [, setLoggedIn] = useRecoilState(isLoggedIn);
@@ -31,7 +15,7 @@ export default function LoginForm(): ReactElement {
 
   const validateBeforeLogin = () => {
     if (validationUtil.isEmpty(email) || validationUtil.isEmpty(password)) {
-      showErrorAlert("Please fill all fields");
+      notificationUtil.showErrorAlert("Please fill all fields");
       return false;
     }
     return true;
@@ -46,10 +30,10 @@ export default function LoginForm(): ReactElement {
         history.push("/");
         break;
       case 400:
-        showErrorAlert("Email or password are invalid");
+        notificationUtil.showErrorAlert("Email or password are invalid");
         break;
       case 500:
-        showErrorAlert("Internal server error");
+        notificationUtil.showErrorAlert("Internal server error");
         break;
     }
   };
@@ -82,6 +66,8 @@ export default function LoginForm(): ReactElement {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FloatingLabel>
+            <Form.Text>You don&apos;t have an account, <a onClick={() => history.push("/register")}>click here</a></Form.Text>
+            <br/>
             <Button
               onClick={async () => {
                 validateBeforeLogin();

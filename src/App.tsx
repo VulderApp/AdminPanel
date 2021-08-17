@@ -9,6 +9,7 @@ import "react-notifications-component/dist/theme.css";
 import { useRecoilState } from "recoil";
 import {isLoggedIn, routeHistory} from "./states";
 import tokenStorageUtil from "./utils/tokenStorageUtil";
+import Register from "./views/Register";
 
 export default function App(): ReactElement {
   const [,setLoggedIn] = useRecoilState(isLoggedIn)
@@ -35,6 +36,9 @@ export default function App(): ReactElement {
             <Switch>
               <Route exact path="/login">
                 <Login />
+              </Route>
+              <Route exact path="/register">
+                <Register/>
               </Route>
             </Switch>
           </div>
