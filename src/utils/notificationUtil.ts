@@ -1,4 +1,4 @@
-import {store} from "react-notifications-component";
+import { store } from "react-notifications-component";
 
 export default {
   showErrorAlert(message: string): void {
@@ -14,6 +14,6 @@ export default {
         duration: 5000,
         onScreen: true,
       },
-    })
-  }
-}
+    });
+  },
+};

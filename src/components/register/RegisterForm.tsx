@@ -1,19 +1,25 @@
-import React, {ReactElement, useState} from "react";
-import {Button, Card, FloatingLabel, Form, FormGroup} from "react-bootstrap";
+import React, { ReactElement, useState } from "react";
+import { Button, Card, FloatingLabel, Form, FormGroup } from "react-bootstrap";
 import notificationUtil from "../../utils/notificationUtil";
+import api from "../../api/api";
 
 export default function RegisterForm(): ReactElement {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [repeatPassword, setRepeatPassword] = useState("")
-  const [privacyPolicy, setPrivacyPolicy] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [privacyPolicy, setPrivacyPolicy] = useState(false);
 
   const register = async () => {
     if (!privacyPolicy)
-      notificationUtil.showErrorAlert("Privacy policy not accepted")
+      notificationUtil.showErrorAlert("Privacy policy not accepted");
+    if (password != repeatPassword)
+      notificationUtil.showErrorAlert(
+        "Password doesn't equal with repeated password"
+      );
+    const response = await api.register(email, password);
   };
 
-  return(
+  return (
     <Card className="text-center">
       <Card.Body>
         <Card.Title>Register your account</Card.Title>
@@ -52,14 +58,16 @@ export default function RegisterForm(): ReactElement {
                 onChange={(e) => setRepeatPassword(e.target.value)}
               />
             </FloatingLabel>
-            <Form.Check type="checkbox" label="You agree Privacy Policy & ToS" onChange={(e) => setPrivacyPolicy(e.target.checked)} />
-            <br/>
-            <Button onClick={async () => await register()}>
-              Register
-            </Button>
+            <Form.Check
+              type="checkbox"
+              label="You agree Privacy Policy & ToS"
+              onChange={(e) => setPrivacyPolicy(e.target.checked)}
+            />
+            <br />
+            <Button onClick={async () => await register()}>Register</Button>
           </FormGroup>
         </Form>
       </Card.Body>
     </Card>
-  )
+  );
 }
