@@ -66,11 +66,12 @@ export default function LoginForm(): ReactElement {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FloatingLabel>
-            <Form.Text>
-              You don&apos;t have an account,{" "}
-              <a onClick={() => history.push("/register")}>click here</a>
-            </Form.Text>
-            <br />
+            <p>
+              <Form.Text>
+                You don&apos;t have an account,{" "}
+                <a className="text-decoration-none" style={{cursor: "pointer"}} onClick={() => history.push("/register")}>click here</a>
+              </Form.Text>
+            </p>
             <Button
               onClick={async () => {
                 validateBeforeLogin();
