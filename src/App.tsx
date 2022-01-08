@@ -5,6 +5,7 @@ import Login from "./views/Login";
 import Appbar from "./components/root/Appbar";
 import { RecoilRoot } from "recoil";
 import Home from "./views/Home";
+import SchoolFormReview from "./views/Options/SchoolFormReview";
 
 const theme = createTheme({
   palette: {
@@ -25,7 +26,11 @@ const App = (): ReactElement => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home />}>
+              <Route path="options">
+                <Route path="school/forms" element={<SchoolFormReview />} />
+              </Route>
+            </Route>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

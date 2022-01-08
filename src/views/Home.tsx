@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { Typography } from "@mui/material";
+import OptionsCard from "../components/home/OptionsCard";
 
 const Home = (): ReactElement => {
-  return <Typography>Home page</Typography>;
+  return <OptionsCard />;
 };
 
 export default Home;
