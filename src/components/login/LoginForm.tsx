@@ -2,7 +2,7 @@ import { Button, Container, SxProps, TextField, Theme } from "@mui/material";
 import React from "react";
 import { loginUser } from "../../api/api";
 import { useSetRecoilState } from "recoil";
-import { token } from "../../states";
+import { jwtToken } from "../../states";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
@@ -13,7 +13,7 @@ interface Values {
 }
 
 const LoginForm = () => {
-  const setToken = useSetRecoilState(token);
+  const setToken = useSetRecoilState(jwtToken);
   const navigate = useNavigate();
 
   const inputStyles: SxProps<Theme> = {

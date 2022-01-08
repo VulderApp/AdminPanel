@@ -5,7 +5,7 @@ export const appbarTitle = atom({
   default: "Vulder Admin Panel",
 });
 
-export const token = atom<string | null>({
-  key: "token",
+export const jwtToken = atom<string | null>({
+  key: "jwtToken",
   default: null,
 });
