@@ -22,8 +22,8 @@ const App = (): ReactElement => {
   return (
     <RecoilRoot>
       <ThemeProvider theme={theme}>
-        <Appbar />
         <BrowserRouter>
+          <Appbar />
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />}>
