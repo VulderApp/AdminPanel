@@ -58,6 +58,8 @@ const LoginForm = () => {
         label="Email"
         variant="outlined"
         type="email"
+        error={formik.touched.email && formik.errors.email !== undefined}
+        helperText={formik.errors.email}
         onChange={formik.handleChange}
         value={formik.values.email}
       />
@@ -67,6 +69,8 @@ const LoginForm = () => {
         label="Password"
         variant="outlined"
         type="password"
+        error={formik.touched.password && formik.errors.password !== undefined}
+        helperText={formik.errors.password}
         onChange={formik.handleChange}
         value={formik.values.password}
       />
