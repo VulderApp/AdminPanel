@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { Typography } from "@mui/material";
+import FormsCard from "../../components/options/school/forms/review/FormsCard";
 
 const SchoolFormReview = (): ReactElement => {
-  return <Typography>School form review</Typography>;
+  return <FormsCard />;
 };
 
 export default SchoolFormReview;

@@ -26,11 +26,8 @@ const App = (): ReactElement => {
           <Appbar />
           <Routes>
             <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />}>
-              <Route path="options">
-                <Route path="school/forms" element={<SchoolFormReview />} />
-              </Route>
-            </Route>
+            <Route path="/home" element={<Home />} />
+            <Route path="options/school/forms" element={<SchoolFormReview />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

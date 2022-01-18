@@ -28,7 +28,7 @@ const OptionsCard = (): ReactElement => {
       <Card>
         <CardContent>
           <List>
-            <ListItemButton onClick={() => navigate("options/school/forms")}>
+            <ListItemButton onClick={() => navigate("/options/school/forms")}>
               <ListItem>
                 <ListItemText>Review School Requests</ListItemText>
               </ListItem>
