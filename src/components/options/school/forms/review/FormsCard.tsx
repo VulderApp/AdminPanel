@@ -7,7 +7,7 @@ import { jwtToken } from "../../../../../states";
 
 const FormsCard = (): ReactElement => {
   const [forms, setForms] = useState<Array<SchoolFormItem>>([]);
-  const [page] = useState<number>(1);
+  const page = 1;
   const token = useRecoilValue(jwtToken);
 
   const handleSchoolFormUpdate = async () => {
