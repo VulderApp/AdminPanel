@@ -28,7 +28,7 @@ const FormsCard = (): ReactElement => {
         display: "flex",
         height: "100%",
         width: "auto",
-        minHeight: "20vh",
+        minHeight: "40vh",
         justifyContent: "center",
         alignItems: "center",
         alignSelf: "center",
