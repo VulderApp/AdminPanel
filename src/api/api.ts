@@ -54,3 +54,43 @@ export const GetSchoolForms = async (
       },
     })
     .catch((err) => err);
+
+export const ApproveSchoolForm = async (
+  token: string,
+  formId: string
+): Promise<AxiosResponse> =>
+  await axios
+    .request({
+      ...apiConfig,
+      url: "/form/ApproveSchoolForm",
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      data: {
+        formId,
+      },
+    })
+    .catch((err) => err);
+
+export const AddSchool = async (
+  token: string,
+  name: string,
+  schoolUrl: string,
+  timetableUrl: string
+): Promise<AxiosResponse> =>
+  await axios
+    .request({
+      ...apiConfig,
+      url: "/school/AddSchool",
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      data: {
+        name,
+        schoolUrl,
+        timetableUrl,
+      },
+    })
+    .catch((err) => err);

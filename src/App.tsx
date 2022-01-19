@@ -6,6 +6,7 @@ import Appbar from "./components/root/Appbar";
 import { RecoilRoot } from "recoil";
 import Home from "./views/Home";
 import SchoolFormReview from "./views/Options/SchoolFormReview";
+import SchoolFormEditor from "./views/Options/SchoolFormEditor";
 
 const theme = createTheme({
   palette: {
@@ -27,7 +28,11 @@ const App = (): ReactElement => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
-            <Route path="options/school/forms" element={<SchoolFormReview />} />
+\            <Route path="/options/school/forms" element={<SchoolFormReview />} />
+            <Route
+              path="/options/school/forms/editor/{:id}"
+              element={<SchoolFormEditor />}
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
