@@ -1,27 +1,42 @@
 import React from "react";
-import { Container, TextField } from "@mui/material";
+import { Button, Container, SxProps, TextField, Theme } from "@mui/material";
 import {
-  AddSchool,
-  ApproveSchoolForm,
+  addSchool,
+  approveSchoolForm,
+  refuseSchoolForm,
   SchoolFormItem,
 } from "../../../../../api";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../../../../../states";
+import { NavigateFunction } from "react-router-dom";
 
 interface EditorFormProps {
-  form: SchoolFormItem;
+  item: SchoolFormItem;
+  navigate: NavigateFunction;
 }
 
-const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
+const EditorForm: React.FC<EditorFormProps> = ({ item, navigate }) => {
   const token = useRecoilValue(jwtToken);
+
+  const inputStyles: SxProps<Theme> = {
+    marginTop: "1rem",
+  };
+
+  const handleRefuseButton = async () => {
+    const response = await refuseSchoolForm(token!, item.id);
+
+    if (response.status !== 200) return;
+
+    navigate("/options/school/forms");
+  };
 
   const formik = useFormik({
     initialValues: {
-      schoolName: form.schoolName,
-      schoolUrl: form.schoolUrl,
-      timetableUrl: form.timetableUrl,
+      schoolName: item.schoolName,
+      schoolUrl: item.schoolUrl,
+      timetableUrl: item.timetableUrl,
     },
     validationSchema: yup.object({
       schoolName: yup.string().min(10, "Too short!").required("Required"),
@@ -29,7 +44,7 @@ const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
       schoolTimetableUrl: yup.string().url("Invalid URL").required("Required"),
     }),
     onSubmit: async (values) => {
-      const addSchoolResponse = await AddSchool(
+      const addSchoolResponse = await addSchool(
         token!,
         values.schoolName,
         values.schoolUrl,
@@ -38,20 +53,35 @@ const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
 
       if (addSchoolResponse.status !== 200) return;
 
-      await ApproveSchoolForm(token!, form.id);
+      await approveSchoolForm(token!, item.id);
+      navigate("/options/school/forms");
     },
   });
 
   return (
     <Container
       component="form"
-      onSubmit={formik.handleSubmit}
       autoComplete="off"
+      onSubmit={formik.handleSubmit}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: "2rem",
+      }}
     >
       <TextField
-        id="outlined-basic"
+        id="requesterEmail"
+        label="Requester Email"
+        variant="outlined"
+        sx={inputStyles}
+        value={item.requesterEmail}
+        disabled={true}
+      />
+      <TextField
+        id="schoolName"
         label="School Name"
         variant="outlined"
+        sx={inputStyles}
         error={
           formik.touched.schoolName && formik.errors.schoolName !== undefined
         }
@@ -60,9 +90,10 @@ const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
         value={formik.values.schoolName}
       />
       <TextField
-        id="outlined-basic"
+        id="schoolUrl"
         label="School Url"
         variant="outlined"
+        sx={inputStyles}
         error={
           formik.touched.schoolUrl && formik.errors.schoolUrl !== undefined
         }
@@ -71,9 +102,10 @@ const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
         value={formik.values.schoolUrl}
       />
       <TextField
-        id="outlined-basic"
+        id="timetableUrl"
         label="Timetable Url"
         variant="outlined"
+        sx={inputStyles}
         error={
           formik.touched.schoolUrl && formik.errors.schoolUrl !== undefined
         }
@@ -81,6 +113,18 @@ const EditorForm: React.FC<EditorFormProps> = ({ form }) => {
         onChange={formik.handleChange}
         value={formik.values.timetableUrl}
       />
+      <Button type="submit" variant="contained" sx={{ marginTop: "2rem" }}>
+        Approve school request
+      </Button>
+      <Button
+        type="button"
+        variant="contained"
+        color="error"
+        sx={inputStyles}
+        onClick={async () => await handleRefuseButton()}
+      >
+        Refuse school request
+      </Button>
     </Container>
   );
 };

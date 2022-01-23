@@ -24,7 +24,11 @@ const FormListItems: React.FC<FormListItemsProps> = ({ items }) => {
         return (
           <>
             <ListItem key={index}>
-              <ListItemButton onClick={navigate("/options/school/forms/editor")}>
+              <ListItemButton
+                onClick={() =>
+                  navigate(`/options/school/forms/editor/${item.id}`)
+                }
+              >
                 <ListItemIcon>
                   {item.approved ? (
                     <DoneIcon sx={{ color: "green" }} />

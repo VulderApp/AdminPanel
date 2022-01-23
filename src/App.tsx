@@ -28,9 +28,12 @@ const App = (): ReactElement => {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
-\            <Route path="/options/school/forms" element={<SchoolFormReview />} />
             <Route
-              path="/options/school/forms/editor/{:id}"
+              path="/options/school/forms"
+              element={<SchoolFormReview />}
+            />
+            <Route
+              path="/options/school/forms/editor/:id"
               element={<SchoolFormEditor />}
             />
           </Routes>
