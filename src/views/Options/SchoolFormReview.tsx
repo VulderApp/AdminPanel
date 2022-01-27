@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import FormsCard from "../../components/options/school/forms/review/FormsCard";
+import FormsCard from "../../components/options/school/forms/list/FormsCard";
 
 const SchoolFormReview = (): ReactElement => {
   return <FormsCard />;

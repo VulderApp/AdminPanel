@@ -9,19 +9,26 @@ import {
 } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 interface FormListItemsProps {
   items: SchoolFormItem[];
 }
 
 const FormListItems: React.FC<FormListItemsProps> = ({ items }) => {
+  const navigate = useNavigate();
+
   return (
     <React.Fragment>
       {items.map((item, index) => {
         return (
           <>
             <ListItem key={index}>
-              <ListItemButton>
+              <ListItemButton
+                onClick={() =>
+                  navigate(`/options/school/forms/editor/${item.id}`)
+                }
+              >
                 <ListItemIcon>
                   {item.approved ? (
                     <DoneIcon sx={{ color: "green" }} />
