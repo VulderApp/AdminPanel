@@ -40,8 +40,6 @@ const EditorForm: React.FC<EditorFormProps> = ({ item, navigate }) => {
     },
     validationSchema: yup.object({
       schoolName: yup.string().min(10, "Too short!").required("Required"),
-      schoolUrl: yup.string().url("Invalid URL").required("Required"),
-      schoolTimetableUrl: yup.string().url("Invalid URL").required("Required"),
     }),
     onSubmit: async (values) => {
       const addSchoolResponse = await addSchool(
