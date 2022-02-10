@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthModel } from "./models/authModel";
 import { SchoolFormItem } from "./models/forms/SchoolFormItem";
+import { ChangePasswordResponse } from "./models/admin/password/changePasswordResponse";
 
 const ADMIN_BASE_URL =
   process.env.NODE_ENV !== "production"
@@ -33,6 +34,26 @@ export const loginUser = async (
       data: {
         email,
         password,
+      },
+    })
+    .catch((err) => err);
+
+export const changeUserPassword = async (
+  token: string,
+  currentPassword: string,
+  newPassword: string
+): Promise<AxiosResponse<ChangePasswordResponse>> =>
+  await axios
+    .request<ChangePasswordResponse>({
+      ...adminConfig,
+      url: "/admin/ChangePassword",
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      data: {
+        currentPassword,
+        newPassword,
       },
     })
     .catch((err) => err);

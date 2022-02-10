@@ -7,6 +7,7 @@ import { RecoilRoot } from "recoil";
 import Home from "./views/Home";
 import SchoolFormReview from "./views/Options/SchoolFormReview";
 import SchoolFormEditor from "./views/Options/SchoolFormEditor";
+import ChangeUserPassword from "./views/Options/ChangeUserPassword";
 
 const theme = createTheme({
   palette: {
@@ -35,6 +36,7 @@ const App = (): ReactElement => {
                 element={<SchoolFormEditor />}
               />
             </Route>
+            <Route path="/user/password" element={<ChangeUserPassword />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
