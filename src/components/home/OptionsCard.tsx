@@ -3,6 +3,7 @@ import {
   Card,
   CardContent,
   Container,
+  Divider,
   List,
   ListItem,
   ListItemButton,
@@ -21,6 +22,7 @@ const OptionsCard = (): ReactElement => {
         width: "auto",
         minHeight: "90vh",
         justifyContent: "center",
+        textAlign: "center",
         alignItems: "center",
         alignSelf: "center",
       }}
@@ -31,6 +33,12 @@ const OptionsCard = (): ReactElement => {
             <ListItemButton onClick={() => navigate("/options/school/forms")}>
               <ListItem>
                 <ListItemText>Review School Requests</ListItemText>
+              </ListItem>
+            </ListItemButton>
+            <Divider />
+            <ListItemButton onClick={() => navigate("/user/password")}>
+              <ListItem>
+                <ListItemText>Change password</ListItemText>
               </ListItem>
             </ListItemButton>
           </List>
