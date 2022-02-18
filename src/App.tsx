@@ -8,6 +8,7 @@ import Home from "./views/Home";
 import SchoolFormReview from "./views/Options/SchoolFormReview";
 import SchoolFormEditor from "./views/Options/SchoolFormEditor";
 import ChangeUserPassword from "./views/Options/ChangeUserPassword";
+import SchoolBrowser from "./views/Options/SchoolBrowser";
 
 const theme = createTheme({
   palette: {
@@ -30,6 +31,7 @@ const App = (): ReactElement => {
             <Route path="/" element={<Login />} />
             <Route path="/home" element={<Home />} />
             <Route path="/options">
+              <Route path="school/browser" element={<SchoolBrowser />} />
               <Route path="school/forms" element={<SchoolFormReview />} />
               <Route
                 path="school/forms/editor/:id"
