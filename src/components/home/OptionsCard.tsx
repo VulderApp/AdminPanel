@@ -36,6 +36,12 @@ const OptionsCard = (): ReactElement => {
               </ListItem>
             </ListItemButton>
             <Divider />
+            <ListItemButton onClick={() => navigate("/options/school/browser")}>
+              <ListItem>
+                <ListItemText>Browse school collection</ListItemText>
+              </ListItem>
+            </ListItemButton>
+            <Divider />
             <ListItemButton onClick={() => navigate("/user/password")}>
               <ListItem>
                 <ListItemText>Change password</ListItemText>

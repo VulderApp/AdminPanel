@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthModel } from "./models/authModel";
 import { SchoolFormItem } from "./models/forms/SchoolFormItem";
 import { ChangePasswordResponse } from "./models/admin/password/changePasswordResponse";
+import { Schools } from "./models/schools/schools";
 
 const ADMIN_BASE_URL =
   process.env.NODE_ENV !== "production"
@@ -145,6 +146,24 @@ export const addSchool = async (
         name,
         schoolUrl,
         timetableUrl,
+      },
+    })
+    .catch((err) => err);
+
+export const getSchools = async (
+  token: string,
+  page: number
+): Promise<AxiosResponse<Schools>> =>
+  await axios
+    .request<Schools>({
+      ...apiConfig,
+      url: "/school/Schools",
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      params: {
+        page,
       },
     })
     .catch((err) => err);
