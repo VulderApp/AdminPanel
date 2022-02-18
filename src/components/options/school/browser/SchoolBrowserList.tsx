@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../../../../states";
 import { getSchools } from "../../../../api";
@@ -12,8 +12,13 @@ import {
   Pagination,
 } from "@mui/material";
 import { Schools } from "../../../../api/models/schools/schools";
+import { NavigateFunction } from "react-router-dom";
 
-const SchoolBrowserList = (): ReactElement => {
+interface SchoolBrowserListProps {
+  navigate: NavigateFunction;
+}
+
+const SchoolBrowserList: React.FC<SchoolBrowserListProps> = ({ navigate }) => {
   const [page, setPage] = useState(1);
   const [items, setItems] = useState<Schools | null>(null);
   const token = useRecoilValue(jwtToken);
@@ -39,7 +44,9 @@ const SchoolBrowserList = (): ReactElement => {
           {items!.schools.map((item) => {
             return (
               <ListItem key={item.id}>
-                <ListItemButton>
+                <ListItemButton
+                  onClick={() => navigate(`/options/school/editor/${item.id}`)}
+                >
                   <ListItemText primary={item.name} />
                 </ListItemButton>
               </ListItem>

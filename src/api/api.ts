@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthModel } from "./models/authModel";
 import { SchoolFormItem } from "./models/forms/SchoolFormItem";
-import { ChangePasswordResponse } from "./models/admin/password/changePasswordResponse";
+import { ResultResponse } from "./models/resultResponse";
 import { Schools } from "./models/schools/schools";
+import { School } from "./models/school/school";
 
 const ADMIN_BASE_URL =
   process.env.NODE_ENV !== "production"
@@ -43,9 +44,9 @@ export const changeUserPassword = async (
   token: string,
   currentPassword: string,
   newPassword: string
-): Promise<AxiosResponse<ChangePasswordResponse>> =>
+): Promise<AxiosResponse<ResultResponse>> =>
   await axios
-    .request<ChangePasswordResponse>({
+    .request<ResultResponse>({
       ...adminConfig,
       url: "/admin/ChangePassword",
       method: "PUT",
@@ -150,6 +151,18 @@ export const addSchool = async (
     })
     .catch((err) => err);
 
+export const getSchool = async (
+  schoolId: string
+): Promise<AxiosResponse<School>> =>
+  await axios.request<School>({
+    ...apiConfig,
+    url: "/school/GetSchool",
+    method: "GET",
+    params: {
+      schoolId,
+    },
+  });
+
 export const getSchools = async (
   token: string,
   page: number
@@ -164,6 +177,30 @@ export const getSchools = async (
       },
       params: {
         page,
+      },
+    })
+    .catch((err) => err);
+
+export const updateSchool = async (
+  token: string,
+  id: string,
+  name: string,
+  schoolUrl: string,
+  timetableUrl: string
+): Promise<AxiosResponse<ResultResponse>> =>
+  await axios
+    .request<ResultResponse>({
+      ...apiConfig,
+      url: "/school/UpdateSchool",
+      method: "PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      data: {
+        id,
+        name,
+        schoolUrl,
+        timetableUrl,
       },
     })
     .catch((err) => err);

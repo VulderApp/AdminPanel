@@ -1,8 +1,13 @@
 import React from "react";
 import { Card, CardContent, Container } from "@mui/material";
 import SchoolBrowserList from "./SchoolBrowserList";
+import { NavigateFunction } from "react-router-dom";
 
-const SchoolBrowserCard = () => {
+interface SchoolBrowserCardProps {
+  navigate: NavigateFunction;
+}
+
+const SchoolBrowserCard: React.FC<SchoolBrowserCardProps> = ({ navigate }) => {
   return (
     <Container
       sx={{
@@ -17,7 +22,7 @@ const SchoolBrowserCard = () => {
     >
       <Card>
         <CardContent>
-          <SchoolBrowserList />
+          <SchoolBrowserList navigate={navigate} />
         </CardContent>
       </Card>
     </Container>
