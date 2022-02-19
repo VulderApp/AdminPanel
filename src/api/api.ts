@@ -204,3 +204,21 @@ export const updateSchool = async (
       },
     })
     .catch((err) => err);
+
+export const deleteSchool = async (
+  token: string,
+  id: string
+): Promise<AxiosResponse<ResultResponse>> =>
+  axios
+    .request<ResultResponse>({
+      ...apiConfig,
+      url: "/school/delete",
+      method: "DELETE",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      data: {
+        id,
+      },
+    })
+    .catch((err) => err);
