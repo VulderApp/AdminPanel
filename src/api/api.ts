@@ -181,6 +181,26 @@ export const getSchools = async (
     })
     .catch((err) => err);
 
+export const getSchoolsWithPagination = async (
+  token: string,
+  input: string,
+  page: number
+): Promise<AxiosResponse<Schools>> =>
+  await axios
+    .request<Schools>({
+      ...apiConfig,
+      url: "/school/FindSchoolsWithPagination",
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+      params: {
+        input,
+        page,
+      },
+    })
+    .catch((err) => err);
+
 export const updateSchool = async (
   token: string,
   id: string,

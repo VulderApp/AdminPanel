@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent, Container } from "@mui/material";
-import SchoolBrowserList from "./SchoolBrowserList";
+import SchoolBrowserContent from "./SchoolBrowserContent";
 import { NavigateFunction } from "react-router-dom";
 
 interface SchoolBrowserCardProps {
@@ -22,7 +22,7 @@ const SchoolBrowserCard: React.FC<SchoolBrowserCardProps> = ({ navigate }) => {
     >
       <Card>
         <CardContent>
-          <SchoolBrowserList navigate={navigate} />
+          <SchoolBrowserContent navigate={navigate} />
         </CardContent>
       </Card>
     </Container>
