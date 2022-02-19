@@ -210,7 +210,7 @@ export const deleteSchool = async (
   id: string
 ): Promise<AxiosResponse<ResultResponse>> =>
   axios
-    .request({
+    .request<ResultResponse>({
       ...apiConfig,
       url: "/school/delete",
       method: "DELETE",
