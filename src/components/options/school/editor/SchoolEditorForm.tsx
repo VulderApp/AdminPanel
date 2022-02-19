@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../../../../states";
-import { updateSchool } from "../../../../api";
+import { deleteSchool, updateSchool } from "../../../../api";
 import { NavigateFunction } from "react-router-dom";
 import { School } from "../../../../api/models/school/school";
 
@@ -21,6 +21,14 @@ const SchoolEditorForm: React.FC<SchoolEditorFormProps> = ({
 
   const inputStyles: SxProps<Theme> = {
     marginTop: "1rem",
+  };
+
+  const handleDeleteSchool = async () => {
+    const deleteResult = await deleteSchool(token!, school.id);
+
+    if (!deleteResult.data.result) return;
+
+    navigate("/options/school/browser");
   };
 
   const formik = useFormik({
@@ -96,6 +104,14 @@ const SchoolEditorForm: React.FC<SchoolEditorFormProps> = ({
       />
       <Button type="submit" variant="contained" sx={{ marginTop: "2rem" }}>
         Update school
+      </Button>
+      <Button
+        variant="contained"
+        color="error"
+        sx={{ marginTop: "2rem" }}
+        onClick={() => handleDeleteSchool()}
+      >
+        Delete school
       </Button>
     </Container>
   );
