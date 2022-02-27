@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, Container, Typography } from "@mui/material";
 import EditorForm from "./EditorForm";
-import { getSchoolForm, SchoolFormItem } from "../../../../../api";
+import { getSchoolForm } from "../../../../../api";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../../../../../states";
 import { NavigateFunction } from "react-router-dom";
+import { SchoolFormItem } from "../../../../../api/models/forms/schoolFormItem";
 
 interface EditorCardProps {
   id: string;

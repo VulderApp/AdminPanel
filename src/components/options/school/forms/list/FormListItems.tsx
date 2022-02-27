@@ -1,5 +1,4 @@
 import React from "react";
-import { SchoolFormItem } from "../../../../../api";
 import {
   Divider,
   ListItem,
@@ -10,6 +9,7 @@ import {
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import { useNavigate } from "react-router-dom";
+import { SchoolFormItem } from "../../../../../api/models/forms/schoolFormItem";
 
 interface FormListItemsProps {
   items: SchoolFormItem[];

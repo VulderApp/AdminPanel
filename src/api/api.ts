@@ -1,9 +1,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { AuthModel } from "./models/authModel";
-import { SchoolFormItem } from "./models/forms/SchoolFormItem";
+import { SchoolFormItem } from "./models/forms/schoolFormItem";
 import { ResultResponse } from "./models/resultResponse";
 import { Schools } from "./models/schools/schools";
 import { School } from "./models/school/school";
+import { SchoolForms } from "./models/forms/schoolForms";
 
 const ADMIN_BASE_URL =
   process.env.NODE_ENV !== "production"
@@ -12,7 +13,7 @@ const ADMIN_BASE_URL =
 
 const API_BASE_URL =
   process.env.NODE_ENV !== "production"
-    ? "https://localhost:7150"
+    ? "https://localhost:6012"
     : process.env.API_URL;
 
 const adminConfig = <AxiosRequestConfig>{
@@ -75,12 +76,12 @@ export const getSchoolForm = async (
     },
   });
 
-export const GetSchoolForms = async (
+export const getSchoolForms = async (
   token: string,
   page: number
-): Promise<AxiosResponse<Array<SchoolFormItem>>> =>
+): Promise<AxiosResponse<SchoolForms>> =>
   await axios
-    .request<Array<SchoolFormItem>>({
+    .request<SchoolForms>({
       ...apiConfig,
       url: "/form/GetSchoolForms",
       method: "GET",

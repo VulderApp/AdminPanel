@@ -4,13 +4,13 @@ import {
   addSchool,
   approveSchoolForm,
   refuseSchoolForm,
-  SchoolFormItem,
 } from "../../../../../api";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useRecoilValue } from "recoil";
 import { jwtToken } from "../../../../../states";
 import { NavigateFunction } from "react-router-dom";
+import { SchoolFormItem } from "../../../../../api/models/forms/schoolFormItem";
 
 interface EditorFormProps {
   item: SchoolFormItem;
