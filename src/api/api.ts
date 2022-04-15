@@ -9,7 +9,7 @@ import { SchoolForms } from "./models/forms/schoolForms";
 const ADMIN_BASE_URL =
   process.env.NODE_ENV !== "production"
     ? "https://localhost:7064/"
-    : process.env.API_URL;
+    : process.env.ADMIN_API_URL;
 
 const API_BASE_URL =
   process.env.NODE_ENV !== "production"
@@ -32,7 +32,7 @@ export const loginUser = async (
   await axios
     .request<AuthModel>({
       ...adminConfig,
-      url: "/auth/Login",
+      url: "/auth/login",
       method: "POST",
       data: {
         email,
@@ -49,7 +49,7 @@ export const changeUserPassword = async (
   await axios
     .request<ResultResponse>({
       ...adminConfig,
-      url: "/admin/ChangePassword",
+      url: "/admin/changePassword",
       method: "PUT",
       headers: {
         authorization: `Bearer ${token}`,
@@ -67,7 +67,7 @@ export const getSchoolForm = async (
 ): Promise<AxiosResponse<SchoolFormItem>> =>
   await axios.request<SchoolFormItem>({
     ...apiConfig,
-    url: "/form/GetSchoolForm",
+    url: "/form",
     headers: {
       authorization: `Bearer ${token}`,
     },
@@ -83,7 +83,7 @@ export const getSchoolForms = async (
   await axios
     .request<SchoolForms>({
       ...apiConfig,
-      url: "/form/GetSchoolForms",
+      url: "/form/forms",
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,
@@ -101,7 +101,7 @@ export const approveSchoolForm = async (
   await axios
     .request({
       ...apiConfig,
-      url: "/form/ApproveSchoolForm",
+      url: "/form/approve",
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
@@ -119,7 +119,7 @@ export const refuseSchoolForm = async (
   await axios
     .request({
       ...apiConfig,
-      url: "/form/RefuseSchoolForm",
+      url: "/form/refuse",
       method: "PUT",
       headers: {
         authorization: `Bearer ${token}`,
@@ -139,7 +139,7 @@ export const addSchool = async (
   await axios
     .request({
       ...apiConfig,
-      url: "/school/AddSchool",
+      url: "/school/add",
       method: "POST",
       headers: {
         authorization: `Bearer ${token}`,
@@ -157,7 +157,7 @@ export const getSchool = async (
 ): Promise<AxiosResponse<School>> =>
   await axios.request<School>({
     ...apiConfig,
-    url: "/school/GetSchool",
+    url: "/school",
     method: "GET",
     params: {
       schoolId,
@@ -171,7 +171,7 @@ export const getSchools = async (
   await axios
     .request<Schools>({
       ...apiConfig,
-      url: "/school/Schools",
+      url: "/school/schools",
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,
@@ -190,7 +190,7 @@ export const getSchoolsWithPagination = async (
   await axios
     .request<Schools>({
       ...apiConfig,
-      url: "/school/FindSchoolsWithPagination",
+      url: "/school/findWithPagination",
       method: "GET",
       headers: {
         authorization: `Bearer ${token}`,
@@ -212,7 +212,7 @@ export const updateSchool = async (
   await axios
     .request<ResultResponse>({
       ...apiConfig,
-      url: "/school/UpdateSchool",
+      url: "/school/update",
       method: "PUT",
       headers: {
         authorization: `Bearer ${token}`,
@@ -238,8 +238,8 @@ export const deleteSchool = async (
       headers: {
         authorization: `Bearer ${token}`,
       },
-      data: {
-        id,
+      params: {
+        schoolId: id,
       },
     })
     .catch((err) => err);
