@@ -1,10 +1,12 @@
+import { Status } from "./schoolFormStatus";
+
 export interface SchoolFormItem {
   requesterEmail: string;
   schoolName: string;
   schoolUrl: string;
   timetableUrl: string;
   createdAt: Date;
-  approved: boolean;
+  status: Status;
   approveAdminId: string;
   approvedAt: Date;
   id: string;
