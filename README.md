@@ -1,6 +1,6 @@
 # Admin panel
 
-[![Lint project](https://github.com/VulderApp/SchoolFormFrontend/actions/workflows/lint.yml/badge.svg)](https://github.com/VulderApp/SchoolFormFrontend/actions/workflows/lint.yml)
+[![Lint project](https://github.com/VulderApp/AdminPanel/actions/workflows/lint.yml/badge.svg)](https://github.com/VulderApp/AdminPanel/actions/workflows/lint.yml)
 
 Admin panel for privileged users to manage schools
 
